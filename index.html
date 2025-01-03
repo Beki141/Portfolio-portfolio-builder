@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Builder</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e0f7fa;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+      }
+
+      form {
+        margin-bottom: 40px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #00796b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #005f56;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Build Your Portfolio</h1>
+
+      <form
+        action="insert_person.php"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <h2>Personal Info</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="picture">Picture:</label>
+        <input type="file" id="picture" name="picture" />
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <h2>Skills</h2>
+        <div id="skills">
+          <div class="skill">
+            <label for="skill_name">Skill Name:</label>
+            <input type="text" name="skill_name[]" required />
+
+            <label for="skill_level">Skill Level:</label>
+            <input type="text" name="skill_level[]" required />
+          </div>
+        </div>
+        <button type="button" onclick="addSkill()">Add Another Skill</button>
+
+        <h2>Projects</h2>
+        <div id="projects">
+          <div class="project">
+            <label for="project_title">Project Title:</label>
+            <input type="text" name="project_title[]" required />
+
+            <label for="project_description">Project Description:</label>
+            <textarea name="project_description[]" required></textarea>
+
+            <label for="project_image">Project Image:</label>
+            <input type="file" name="project_image[]" />
+          </div>
+        </div>
+        <button type="button" onclick="addProject()">
+          Add Another Project
+        </button>
+
+        <h2>Contact</h2>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" />
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <h2>Testimonials</h2>
+        <div id="testimonials">
+          <div class="testimonial">
+            <label for="client_name">Client Name:</label>
+            <input type="text" name="client_name[]" required />
+
+            <label for="feedback">Feedback:</label>
+            <textarea name="feedback[]" required></textarea>
+          </div>
+        </div>
+        <button type="button" onclick="addTestimonial()">
+          Add Another Testimonial
+        </button>
+
+        <button type="submit">Save All Info</button>
+      </form>
+
+      <button onclick="window.location.href='manage_users.php'">
+        Manage Users
+      </button>
+    </div>
+
+    <script>
+      function addSkill() {
+        const skillDiv = document.createElement("div");
+        skillDiv.classList.add("skill");
+        skillDiv.innerHTML = `
+                <label for="skill_name">Skill Name:</label>
+                <input type="text" name="skill_name[]" required>
+                <label for="skill_level">Skill Level:</label>
+                <input type="text" name="skill_level[]" required>
+            `;
+        document.getElementById("skills").appendChild(skillDiv);
+      }
+
+      function addProject() {
+        const projectDiv = document.createElement("div");
+        projectDiv.classList.add("project");
+        projectDiv.innerHTML = `
+                <label for="project_title">Project Title:</label>
+                <input type="text" name="project_title[]" required>
+                <label for="project_description">Project Description:</label>
+                <textarea name="project_description[]" required></textarea>
+                <label for="project_image">Project Image:</label>
+                <input type="file" name="project_image[]">
+            `;
+        document.getElementById("projects").appendChild(projectDiv);
+      }
+
+      function addTestimonial() {
+        const testimonialDiv = document.createElement("div");
+        testimonialDiv.classList.add("testimonial");
+        testimonialDiv.innerHTML = `
+                <label for="client_name">Client Name:</label>
+                <input type="text" name="client_name[]" required>
+                <label for="feedback">Feedback:</label>
+                <textarea name="feedback[]" required></textarea>
+            `;
+        document.getElementById("testimonials").appendChild(testimonialDiv);
+      }
+    </script>
+  </body>
+</html>

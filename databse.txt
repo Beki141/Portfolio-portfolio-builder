@@ -1,0 +1,48 @@
+
+CREATE DATABASE portfolio_builder;
+
+USE portfolio_builder;
+
+CREATE TABLE person (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    picture VARCHAR(255),
+    description TEXT NOT NULL
+);
+
+
+CREATE TABLE skills (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL,
+    skill_name VARCHAR(255) NOT NULL,
+    skill_level VARCHAR(50) NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL,
+    project_title VARCHAR(255) NOT NULL,
+    project_description TEXT NOT NULL,
+    project_image VARCHAR(255),
+    FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE
+);
+
+CREATE TABLE contact (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    message TEXT NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE testimonial (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL,
+    client_name VARCHAR(255) NOT NULL,
+    feedback TEXT NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE
+);
